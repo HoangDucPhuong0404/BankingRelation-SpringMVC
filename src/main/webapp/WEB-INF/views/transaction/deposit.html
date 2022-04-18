@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit money into customer's account
+    </title>
+    <th:block th:replace="~{/layout/header-crud ::head}"></th:block>
+</head>
+<body>
+<div class="container">
+    <div class="row" id="header">
+        <div class="col-sm-8">
+            <h1>Deposit money into customer's account</h1>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-outline-light" style="float: right;"
+                    onclick="window.location.href='/customer'">
+                <i class="fa fa-list"></i>
+                <span>Customers List</span>
+            </button>
+        </div>
+    </div>
+
+    <form th:action="@{/deposit/__${customer.id}__}" th:object="${deposit}" method="post" class="needs-validation" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">Customer ID</label>
+                <input type="text" class="form-control" th:value="${customer.id}" readonly>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName"
+                       th:value="${customer.fullName}" readonly>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Current balance (VND)</label>
+                <input type="number" class="form-control" id="balance" name="balance"
+                       th:value="${customer.balance}" readonly>
+            </div>
+            <div class="col-md-6">
+                <label for="transferAmount" class="form-label">Transaction Amount (VND)</label>
+                <input type="number" class="form-control" id="transferAmount" name="transferAmount"
+                       value="1001" th:field="*{amount}">
+                <div class="invalid-feedback">
+                    Please choose amount.
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <br>
+                <button type="submit" id="btnCreateCustomer" class="btn btn-outline-success">
+                    <i class="far fa-plus-square"></i>
+                    Deposit
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <footer>
+            <th:block th:if="${message}">
+                <div class="bg-success p-2 text-white"><span th:text="${message}"></span></div>
+            </th:block>
+            <th:block th:if="${error}">
+                <div class="bg-danger bg-gradient p-2 text-white"><span th:text="${error}"></span></div>
+            </th:block>
+        </footer>
+    </div>
+</div>
+
+
+<th:block th:replace="~{/layout/script ::script_all}" />
+</body>
+
+</html>

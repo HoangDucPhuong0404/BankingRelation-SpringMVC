@@ -1,0 +1,65 @@
+div{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+#header{
+    width: 100%;
+    height: 100px;
+    background: rgb(53, 93, 224);
+    color: white;
+}
+#header table {
+    width: 100%;
+    height: 100%;
+}
+button {
+    border-spacing : 0px;
+    text-align: center;
+    font-size: 18px;
+    height: 40px;
+    border-radius: 5px;
+    border: 2px solid white;
+    background: rgb(53, 93, 224);
+    color: white;
+    padding: 0px
+}
+
+#main {
+    width: 98%;
+    height: auto;
+}
+#main table{
+    width: 100%;
+    height: auto;
+    border-spacing : 0px ;
+}
+#main table tr th{
+    text-align: center;
+    background: green;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+.id{
+    width: 5%;
+}
+.fullname{
+    width: 15%;
+}
+.email{
+    width: 15%;
+}
+.phone{
+    width: 15%;
+}
+.address{
+    width: 15%;
+}
+.balance{
+    width: 15%;
+}
+.action{
+    width: 15%;
+}

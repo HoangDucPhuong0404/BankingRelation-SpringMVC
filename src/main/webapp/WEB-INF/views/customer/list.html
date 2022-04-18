@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer List</title>
+    <th:block th:replace="~{/layout/header::header}"></th:block>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+</head>
+<body>
+
+<div id="header" style="background-color: dodgerblue">
+    <table>
+        <tr>
+            <td style="width: 60%;"><h1 style="color: white">List of customers</h1></td>
+            <td style="width: 40%;">
+                <button type="button" class="btn btn-outline-light" onclick="window.location.href='/history-transfers'">
+                    <i class="fa fa-history"></i>
+                    <span> Transfer money information</span>
+                </button>
+                <button type="button" class="btn btn-outline-light" onclick="window.location.href='/customer/create-customer'">
+                    <i class="far fa-plus-square"></i>
+                    <span>Add New Customer</span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="main">
+    <table class="table table-striped table table-hover">
+        <tr id="head-table" style="background-color: lightsalmon">
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Balance</th>
+            <th colspan="5" style="text-align: center">Action</th>
+        </tr>
+        <th:block th:each="customer ,iterStat : ${customers}">
+            <tr role="row" th:class="${iterStat.odd} ? 'odd':'even'">
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.fullName}"></td>
+                <td th:text="${customer.email}"></td>
+                <td th:text="${customer.phone}"></td>
+                <td th:text="${customer.address}"></td>
+                <td th:text="${customer.balance}" style="text-align: center"></td>
+
+                <td>
+                    <a class="btn btn-outline-secondary"
+                       data-toggle="tooltip" data-placement="top" title="Edit"
+                       th:href="@{/customer/edit-customer/__${customer.id}__ }">
+                        <i class="far fa-edit"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-success"
+                       data-toggle="tooltip" data-placement="top" title="Desposit"
+                       th:href="@{/deposit/__${customer.id}__ }"><i class="far fa-plus-square"></i>
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-warning"
+                       data-toggle="tooltip" data-placement="top" title="Withdraw"
+                       th:href="@{/withdraw/__${customer.id}__ }"><i class="fas fa-minus"></i></a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary"
+                       data-toggle="tooltip" data-placement="top" title="Transfer"
+                       th:href="@{/transfers/__${customer.id}__ }"> <i class="fas fa-exchange-alt"></i></a>
+                </td>
+                <td>
+                    <a class="btn btn-outline-danger"
+                       data-toggle="tooltip" data-placement="top" title="Suspended"
+                       th:href="@{/customer/delete-customer/__${customer.id}__ }"><i class="fas fa-ban"></i></a>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+    <div>
+        <a th:href="@{'/customers'(page=${customers.number - 1})}" th:if="${customers.hasPrevious()}">Previous</a>
+        <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>
+        <a th:href="@{'/customers'(page=${customers.number + 1})}" th:if="${customers.hasNext()}">Next</a>
+    </div>
+</div>
+<th:block th:replace="~{/layout/script:: script_all}"></th:block>
+</body>
+</html>
